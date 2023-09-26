@@ -1,0 +1,17 @@
+/*
+ * motor.c
+ *
+ *  Created on: May 12, 2023
+ *      Author: DELL
+ */
+#include "motor.h"
+
+void DcMotor_Init(void)
+{
+
+}
+
+void DcMotor_Rotate(DcMotor_State state,uint8 speed)
+{
+
+}

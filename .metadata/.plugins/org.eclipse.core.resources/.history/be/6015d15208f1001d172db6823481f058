@@ -1,0 +1,21 @@
+/*
+ * FanController.c
+ *
+ *  Created on: May 9, 2023
+ *      Author: Nada Hefnawy
+ */
+
+#include "adc.h"
+#include "lcd.h"
+int main(void)
+{
+    Timer0_PWM_Init(0); // Generate PWM with 0% duty cycle
+
+    ADC_init(&Config_Ptr(AREF,F_CPU_8));
+
+
+	while(1)
+	{
+
+	}
+}

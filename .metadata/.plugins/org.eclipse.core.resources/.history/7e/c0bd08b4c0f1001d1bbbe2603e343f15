@@ -1,0 +1,34 @@
+ /******************************************************************************
+ *
+ * Module: DC MOTOR
+ *
+ * File Name: DcMotor.c
+ *
+ * Description: source file for the ATmega32 DC MOTOR driver
+ *
+ * Author: Nada Hefnawy
+ *
+ *******************************************************************************/
+#include "gpio.h"
+#include "pwm.h"
+#include "common_macros.h"
+#include "DcMotor.h"
+
+
+/*
+ * Description:
+ * Function to setup the DC Motor pins direction and stop the motor at the beginning.
+ */
+void DcMotor_Init(void)
+{
+	GPIO_setupPinDirection(MOTOR_OUTPUT_0_PORTID, MOTOR_OUTPUT_0_PINID, PIN_OUTPUT);
+	GPIO_setupPinDirection(MOTOR_OUTPUT_1_PORTID, MOTOR_OUTPUT_1_PINID, PIN_OUTPUT);
+	DcMotor_Rotate(STOP, 0);
+}
+
+void DcMotor_Rotate(DcMotor_State state,uint8 speed)
+{
+	PWM_Timer0_Start(speed);
+	GPIO_writePin(MOTOR_OUTPUT_0_PORTID, MOTOR_OUTPUT_0_PINID, GET_BIT(state,0));
+	GPIO_writePin(MOTOR_OUTPUT_1_PORTID, MOTOR_OUTPUT_1_PINID, GET_BIT(state,1));
+}

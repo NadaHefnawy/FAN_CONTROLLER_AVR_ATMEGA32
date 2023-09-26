@@ -1,0 +1,18 @@
+/*
+ * FanController.c
+ *
+ *  Created on: May 9, 2023
+ *      Author: DELL
+ */
+
+
+int main(void)
+{
+    Timer0_PWM_Init(0); // Generate PWM with 0% duty cycle
+
+
+	while(1)
+	{
+
+	}
+}

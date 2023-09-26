@@ -1,0 +1,26 @@
+/*
+ * motor.c
+ *
+ *  Created on: May 12, 2023
+ *      Author: DELL
+ */
+#include "motor.h"
+#include "gpio.h"
+#include "pwm.h"
+#include "common_macros.h"
+
+void DcMotor_Init(void)
+{
+	GPIO_setupPinDirection(MOTOR_OUTPUT_0_PORTID, MOTOR_OUTPUT_0_PINID, PIN_OUTPUT);
+	GPIO_setupPinDirection(MOTOR_OUTPUT_1_PORTID, MOTOR_OUTPUT_1_PINID, PIN_OUTPUT);
+	GPIO_writePin(MOTOR_OUTPUT_0_PORTID, MOTOR_OUTPUT_0_PINID, LOGIC_LOW);
+	GPIO_writePin(MOTOR_OUTPUT_1_PORTID, MOTOR_OUTPUT_1_PINID, LOGIC_LOW);
+}
+
+void DcMotor_Rotate(DcMotor_State state,uint8 speed)
+{
+	GPIO_writePin(MOTOR_OUTPUT_0_PORTID, MOTOR_OUTPUT_0_PINID, GET_BIT(state,0));
+	GPIO_writePin(MOTOR_OUTPUT_1_PORTID, MOTOR_OUTPUT_1_PINID, GET_BIT(state,1));
+
+
+}

@@ -1,0 +1,51 @@
+/*
+ * FanController.c
+ *
+ *  Created on: May 9, 2023
+ *      Author: Nada Hefnawy
+ */
+
+#include "adc.h"
+#include "lcd.h"
+#include "std_types.h"
+#include "motor.h"
+#include "lm35_sensor.h"
+#include "pwm.h"
+int main(void) {
+	LCD_init();
+	PWM_Timer0_Start(0); // Generate PWM with 0% duty cycle
+	ADC_ConfigType ADC_Config_Ptr={INTERNAL,F_CPU_8};
+
+	ADC_init(&ADC_Config_Ptr);
+	DcMotor_Init();
+
+
+	boolean flag = FALSE;
+
+	while (1) {
+		uint8 temp = LM35_getTemperature();
+
+		if (temp < 30) {
+			flag = FALSE;
+			DcMotor_Rotate(STOP, 0);
+			LCD_intgerToString(temp);
+		} else if (temp >= 30 && temp < 60) {
+			flag = TRUE;
+			DcMotor_Rotate(CLOCKWISE, 25);
+			LCD_intgerToString(temp);
+		} else if (temp >= 60 && temp < 90) {
+			flag = TRUE;
+			DcMotor_Rotate(CLOCKWISE, 50);
+			LCD_intgerToString(temp);
+		} else if (temp >= 90 && temp < 120) {
+			flag = TRUE;
+			DcMotor_Rotate(CLOCKWISE, 75);
+			LCD_intgerToString(temp);
+		} else if (temp >= 120) {
+			flag = TRUE;
+			DcMotor_Rotate(CLOCKWISE, 100);
+			LCD_intgerToString(temp);
+		}
+
+	}
+}

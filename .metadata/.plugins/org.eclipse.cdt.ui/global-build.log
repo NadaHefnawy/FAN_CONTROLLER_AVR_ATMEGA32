@@ -1,0 +1,41 @@
+21:28:32 **** Incremental Build of configuration Debug for project FAN ****
+make all 
+Building file: ../FanController.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"FanController.d" -MT"FanController.o" -c -o "FanController.o" "../FanController.c"
+Finished building: ../FanController.c
+ 
+Building file: ../adc.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"adc.d" -MT"adc.o" -c -o "adc.o" "../adc.c"
+Finished building: ../adc.c
+ 
+Building file: ../lm35_sensor.c
+Invoking: AVR Compiler
+avr-gcc -Wall -g2 -gstabs -O0 -fpack-struct -fshort-enums -ffunction-sections -fdata-sections -std=gnu99 -funsigned-char -funsigned-bitfields -mmcu=atmega32 -DF_CPU=1000000UL -MMD -MP -MF"lm35_sensor.d" -MT"lm35_sensor.o" -c -o "lm35_sensor.o" "../lm35_sensor.c"
+Finished building: ../lm35_sensor.c
+ 
+Building target: FAN.elf
+Invoking: AVR C Linker
+avr-gcc -Wl,-Map,FAN.map -mmcu=atmega32 -o "FAN.elf"  ./DcMotor.o ./FanController.o ./adc.o ./gpio.o ./lcd.o ./lm35_sensor.o ./pwm.o   
+Finished building target: FAN.elf
+ 
+Invoking: AVR Create Extended Listing
+avr-objdump -h -S FAN.elf  >"FAN.lss"
+Finished building: FAN.lss
+ 
+Invoking: Print Size
+avr-size --format=avr --mcu=atmega32 FAN.elf
+AVR Memory Usage
+----------------
+Device: atmega32
+
+Program:    9310 bytes (28.4% Full)
+(.text + .data + .bootloader)
+
+Data:        296 bytes (14.5% Full)
+(.data + .bss + .noinit)
+
+
+Finished building: sizedummy
+ 

@@ -1,0 +1,32 @@
+ /******************************************************************************
+ *
+ * Module: DC MOTOR
+ *
+ * File Name: DcMotor.h
+ *
+ * Description: header file for the ATmega32 DC MOTOR driver
+ *
+ * Author: Nada Hefnawy
+ *
+ *******************************************************************************/
+
+#ifndef MOTOR_H_
+#define MOTOR_H_
+#include "std_types.h"
+
+#define MOTOR_OUTPUT_0_PORTID               PORTB_ID
+#define MOTOR_OUTPUT_0_PINID                PIN0_ID
+
+#define MOTOR_OUTPUT_1_PORTID               PORTB_ID
+#define MOTOR_OUTPUT_1_PINID                PIN1_ID
+
+typedef enum {
+	STOP, ANTI_CLOCKWISE,CLOCKWISE
+}DcMotor_State;
+
+void DcMotor_Init(void);
+
+void DcMotor_Rotate(DcMotor_State state,uint8 speed);
+
+
+#endif /* MOTOR_H_ */

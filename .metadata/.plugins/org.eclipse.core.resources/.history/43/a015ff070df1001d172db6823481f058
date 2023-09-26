@@ -1,0 +1,62 @@
+/*
+ * FanController.c
+ *
+ *  Created on: May 9, 2023
+ *      Author: Nada Hefnawy
+ */
+
+#include "adc.h"
+#include "lcd.h"
+#include "std_types.h"
+#include "motor.h"
+#include "lm35_sensor.h"
+#include "pwm.h"
+int main(void) {
+	LCD_init();
+
+	ADC_ConfigType ADC_Config_Ptr={INTERNAL,F_CPU_8};
+
+	ADC_init(&ADC_Config_Ptr);
+
+	DcMotor_Init();
+
+
+	boolean flag = FALSE;
+
+	while (1) {
+		uint8 Temperature = LM35_getTemperature();
+
+		if (Temperature < 30) {
+					LCD_displayStringRowColumn(0, 0, "FAN is OFF");
+					LCD_displayStringRowColumn(1, 0, "Temp = ");
+					LCD_intgerToString(Temperature);
+					LCD_displayCharacter(' ');
+					DcMotor_Rotate(STOP, 0);
+				} else if (Temperature >= 30 && Temperature < 60) {
+					LCD_displayStringRowColumn(0, 0, "FAN is ON ");
+					LCD_displayStringRowColumn(1, 0, "Temp = ");
+					LCD_intgerToString(Temperature);
+					LCD_displayCharacter(' ');
+					DcMotor_Rotate(CLOCKWISE, 25);
+				} else if (Temperature >= 60 && Temperature < 90) {
+					LCD_displayStringRowColumn(0, 0, "FAN is ON ");
+					LCD_displayStringRowColumn(1, 0, "Temp = ");
+					LCD_intgerToString(Temperature);
+					LCD_displayCharacter(' ');
+					DcMotor_Rotate(CLOCKWISE, 50);
+				} else if (Temperature >= 90 && Temperature < 120) {
+					LCD_displayStringRowColumn(0, 0, "FAN is ON ");
+					LCD_displayStringRowColumn(1, 0, "Temp = ");
+					LCD_intgerToString(Temperature);
+					LCD_displayCharacter(' ');
+					DcMotor_Rotate(CLOCKWISE, 75);
+				} else {
+					LCD_displayStringRowColumn(0, 0, "FAN is ON ");
+					LCD_displayStringRowColumn(1, 0, "Temp = ");
+					LCD_intgerToString(Temperature);
+					LCD_displayCharacter(' ');
+					DcMotor_Rotate(CLOCKWISE, 100);
+				}
+
+	}
+}
